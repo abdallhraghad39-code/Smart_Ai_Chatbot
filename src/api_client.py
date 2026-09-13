@@ -18,13 +18,31 @@ client = cohere.ClientV2(API_KEY)
 # =====================================
 
 def get_ai_response(messages):
-  """
-  Sends a message to the AI API and returns the response.
-  """
 
-  response = client.chat(
-      model = "command-a-03-2025",
-      messages = messages
-  )
+    try:
 
-  return response
+        response = client.chat(
+
+            model="command-a-03-2025",
+
+            messages=messages,
+
+            temperature=0.5
+
+        )
+
+        text = response.message.content[0].text
+
+        return text.strip()
+
+    except Exception as error:
+
+        print(f"API Error: {error}")
+
+        return (
+
+            "Sorry, something went wrong while contacting the AI service. "
+
+            "Please try again."
+
+        )

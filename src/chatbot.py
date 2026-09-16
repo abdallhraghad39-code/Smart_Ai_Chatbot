@@ -1,5 +1,5 @@
 from api_client import get_ai_response
-from prompts import build_prompt, update_history
+from prompts import initialize_history, build_prompt, add_assistant_reply
 
 def get_user_input():
     return input("You: ").strip()
@@ -9,7 +9,8 @@ def display_response(text):
 
 def run_chatbot():
     print("Welcome to the AI Chatbot! Type 'exit' to quit.\n")
-    
+    conversation_history = initialize_history() 
+
     while True:
         user_msg = get_user_input()
         
@@ -21,10 +22,10 @@ def run_chatbot():
             print("Message cannot be empty. Please try again.")
             continue
             
-        prompt_data = build_prompt(user_msg)
-        response_text = get_ai_response(prompt_data)
+        conversation_history = build_prompt(conversation_history, user_msg)
+        response_text = get_ai_response(conversation_history)
         display_response(response_text)
-        update_history(user_msg, response_text)
+        conversation_history = add_assistant_reply(conversation_history, response_text)
 
 if __name__ == "__main__":
     run_chatbot()

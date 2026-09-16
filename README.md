@@ -1,4 +1,4 @@
-# Smart AI Chatbot — TechMaster Academy, Phase 04 / Project 04
+# Smart AI Chatbot
 
 A conversational AI assistant that sends user messages to Cohere's API and
 returns responses through a controlled chatbot loop, with structured
